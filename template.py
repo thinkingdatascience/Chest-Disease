@@ -33,6 +33,7 @@ list_of_files = [
     "research",
     "templates/index.html",
     "requirements.txt",
+    "main.py",
 ]
 
 
