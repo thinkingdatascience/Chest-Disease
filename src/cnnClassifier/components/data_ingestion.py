@@ -33,7 +33,7 @@ class DataIngestion:
     def extract_zip_file(self):
         unzip_path = self.config.unzip_dir
 
-        create_directories(path_to_directories=unzip_path)
+        create_directories(path_to_directories=[unzip_path])
 
         with ZipFile(self.config.local_data_file, "r") as zip_ref:
             zip_ref.extractall(unzip_path)
