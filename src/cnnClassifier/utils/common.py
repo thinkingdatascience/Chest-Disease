@@ -1,14 +1,12 @@
 from pathlib import Path
 from box import ConfigBox
 from box.exceptions import BoxValueError
-from ensure import ensure_annotations
 import yaml
 import os
 
-from cnnCassifier import logger
+from cnnClassifier import logger
 
 
-@ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
     try:
         with open(path_to_yaml, mode="r") as yaml_file:
@@ -23,7 +21,6 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
         raise e
 
 
-@ensure_annotations
 def create_directories(path_to_directories: list, verbose=True):
     for path in path_to_directories:
         os.makedirs(path, exist_ok=True)

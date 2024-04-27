@@ -1,6 +1,6 @@
 # Chest-Disease-Classification-from-Chest-CT-Scan-Image
 
- - [Data link](https://drive.google.com/file/d/1z0mreUtRmR-P-magILsDR3T7M6IkGXtY/view?usp=sharing)
+ - [Data link](https://drive.google.com/file/d/1-B_zHEL3RsnNgs5uz6odUGNVR2pp_xc7/view?usp=sharing)
 
 ## Workflows
 
