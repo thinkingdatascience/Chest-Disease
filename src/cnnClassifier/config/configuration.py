@@ -1,8 +1,10 @@
+import os
 from cnnClassifier.constants import *
 from cnnClassifier.utils.common import create_directories, read_yaml
 from cnnClassifier.entity.config_entity import (
     DataIngestionConfig,
     PrepareBaseModelConfig,
+    TrainingConfig,
 )
 
 
@@ -32,7 +34,7 @@ class ConfigurationManager:
         return data_ingestion_config
 
     def get_prepare_base_model_config(self) -> PrepareBaseModelConfig:
-        config = self.config.prepase_base_model
+        config = self.config.prepare_base_model
 
         create_directories(path_to_directories=[config.root_dir])
 
@@ -49,3 +51,23 @@ class ConfigurationManager:
         )
 
         return prepare_base_model_config
+
+    def get_training_config(self) -> TrainingConfig:
+        training = self.config.training
+        prepare_base_model = self.config.prepare_base_model
+        training_data = self.config.data_ingestion.unzip_dir
+
+        create_directories(path_to_directories=[training.root_dir])
+
+        training_config = TrainingConfig(
+            root_dir=Path(training.root_dir),
+            trained_model_path=Path(training.trained_model_path),
+            updated_base_model_path=Path(prepare_base_model.updated_base_model_path),
+            training_data=os.path.join(training_data, "Chest-CT-Scan-data"),
+            params_epochs=self.params.EPOCHS,
+            params_batch_size=self.params.BATCH_SIZE,
+            params_augmentation=self.params.AUGMENTATION,
+            params_image_size=self.params.IMAGE_SIZE,
+        )
+
+        return training_config

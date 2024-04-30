@@ -1,7 +1,6 @@
 import tensorflow as tf
 from pathlib import Path
 import shutil
-
 from cnnClassifier.entity.config_entity import PrepareBaseModelConfig
 
 
