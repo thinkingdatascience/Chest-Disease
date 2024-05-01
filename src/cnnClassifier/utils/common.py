@@ -3,6 +3,7 @@ from box import ConfigBox
 from box.exceptions import BoxValueError
 import yaml
 import os
+import json
 
 from cnnClassifier import logger
 
@@ -26,3 +27,10 @@ def create_directories(path_to_directories: list, verbose=True):
         os.makedirs(path, exist_ok=True)
         if verbose:
             logger.info(f"Created directories at path: {path}")
+
+
+def save_json(path: Path, data: dict):
+    with open(path, "w") as json_file:
+        json.dump(data, json_file, indent=4)
+
+    logger.info(f"json file saved at path {path}")

@@ -5,6 +5,7 @@ from cnnClassifier.entity.config_entity import (
     DataIngestionConfig,
     PrepareBaseModelConfig,
     TrainingConfig,
+    EvaluationConfig,
 )
 
 
@@ -71,3 +72,18 @@ class ConfigurationManager:
         )
 
         return training_config
+
+    def get_evaluation_config(self) -> EvaluationConfig:
+        training_data = self.config.data_ingestion.unzip_dir
+        training = self.config.training
+
+        evaluation_config = EvaluationConfig(
+            path_of_model=training.trained_model_path,
+            training_data=os.path.join(training_data, "Chest-CT-Scan-data"),
+            all_params=self.params,
+            mlflow_uri="https://dagshub.com/thinkingdatascience/Chest-Disease.mlflow",
+            params_batch_size=self.params.BATCH_SIZE,
+            params_image_size=self.params.IMAGE_SIZE,
+        )
+
+        return evaluation_config
