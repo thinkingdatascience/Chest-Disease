@@ -1,5 +1,6 @@
 import tensorflow as tf
 from pathlib import Path
+import shutil
 from cnnClassifier.entity.config_entity import TrainingConfig
 
 
@@ -10,6 +11,10 @@ class Training:
     @staticmethod
     def save_model(path: Path, model: tf.keras.Model):
         model.save(path)
+
+    @staticmethod
+    def copy_model(source: Path, destination: Path):
+        shutil.copyfile(src=source, dst=destination)
 
     def get_updated_base_model(self):
         self.model = tf.keras.models.load_model(self.config.updated_base_model_path)
@@ -79,3 +84,4 @@ class Training:
         )
 
         self.save_model(path=self.config.trained_model_path, model=self.model)
+        self.copy_model(self.config.trained_model_path, self.config.save_model_path)

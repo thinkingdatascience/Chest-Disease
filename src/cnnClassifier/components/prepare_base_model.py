@@ -1,6 +1,5 @@
 import tensorflow as tf
 from pathlib import Path
-import shutil
 from cnnClassifier.entity.config_entity import PrepareBaseModelConfig
 
 
@@ -11,10 +10,6 @@ class PrepareBaseModel:
     @staticmethod
     def save_model(path: Path, model: tf.keras.Model):
         model.save(path)
-
-    @staticmethod
-    def copy_model(source: Path, destination: Path):
-        shutil.copyfile(src=source, dst=destination)
 
     def get_base_model(self):
         self.model = tf.keras.applications.VGG16(
@@ -60,6 +55,3 @@ class PrepareBaseModel:
         )
 
         self.save_model(path=self.config.updated_base_model_path, model=self.full_model)
-        self.copy_model(
-            self.config.updated_base_model_path, self.config.save_model_path
-        )
