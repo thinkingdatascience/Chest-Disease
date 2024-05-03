@@ -4,6 +4,7 @@ from box.exceptions import BoxValueError
 import yaml
 import os
 import json
+import base64
 
 from cnnClassifier import logger
 
@@ -34,3 +35,10 @@ def save_json(path: Path, data: dict):
         json.dump(data, json_file, indent=4)
 
     logger.info(f"json file saved at path {path}")
+
+
+def decode_image(imgstring, filename):
+    imgdata = base64.b64decode(imgstring)
+    with open(filename, "wb") as img:
+        img.write(imgdata)
+        img.close()
